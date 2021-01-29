@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tblpersons{% endblock %}
+
+{% block body %}
+    <h1>Tblpersons</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tblperson.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ tblperson.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ tblperson.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Dob</th>
+                <td>{{ tblperson.dob ? tblperson.dob|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ tblperson.gender }}</td>
+            </tr>
+            <tr>
+                <th>Organization</th>
+                <td>{{ tblperson.organization }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ tblperson.designation }}</td>
+            </tr>
+            <tr>
+                <th>Countryid</th>
+                <td>{{ tblperson.countryid }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ tblperson.state }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ tblperson.city }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ tblperson.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>PhotoName</th>
+                <td>{{ tblperson.photoName }}</td>
+            </tr>
+            <tr>
+                <th>PhotoContent</th>
+                <td>{{ tblperson.photoContent }}</td>
+            </tr>
+            <tr>
+                <th>IsSelfEmp</th>
+                <td>{{ tblperson.isSelfEmp ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Doj</th>
+                <td>{{ tblperson.doj ? tblperson.doj|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Contacts</th>
+                <td>{{ tblperson.contacts }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tblpersons_index') }}">back to list</a>
+
+    <a href="{{ path('tblpersons_edit', {'id': tblperson.id}) }}">edit</a>
+
+    {{ include('Persons/_delete_form.html.twig') }}
+{% endblock %}

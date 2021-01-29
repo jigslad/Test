@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    {% for contact in form.contacts %}
+        <li>
+            {{ form_errors(contact) }}
+            {{ form_widget(contact) }}
+        </li>
+    {% endfor %}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

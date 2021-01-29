@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Types index{% endblock %}
+
+{% block body %}
+    <h1>Contact Types index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Contact Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tblcontacttype in tblcontacttypes %}
+            <tr>
+                <td>{{ tblcontacttype.id ? 'Yes' : 'No' }}</td>
+                <td>{{ tblcontacttype.contacttype }}</td>
+                <td>
+                    <a href="{{ path('contacttypes_show', {'id': tblcontacttype.id}) }}">show</a>
+                    <a href="{{ path('contacttypes_edit', {'id': tblcontacttype.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('contacttypes_new') }}">Create new</a>
+{% endblock %}

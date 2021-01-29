@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tbllocations index{% endblock %}
+
+{% block body %}
+    <h1>Tbllocations index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Locationtype</th>
+                <th>Description</th>
+                <th>Parentid</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tbllocation in tbllocations %}
+            <tr>
+                <td>{{ tbllocation.id }}</td>
+                <td>{{ tbllocation.name }}</td>
+                <td>{{ tbllocation.locationtype ? 'Yes' : 'No' }}</td>
+                <td>{{ tbllocation.description }}</td>
+                <td>{{ tbllocation.parentid }}</td>
+                <td>
+                    <a href="{{ path('tbllocations_show', {'id': tbllocation.id}) }}">show</a>
+                    <a href="{{ path('tbllocations_edit', {'id': tbllocation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tbllocations_new') }}">Create new</a>
+{% endblock %}

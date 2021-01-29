@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tblcontacts index{% endblock %}
+
+{% block body %}
+    <h1>Tblcontacts index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Personid</th>
+                <th>Serialnumber</th>
+                <th>Detail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tblcontact in tblcontacts %}
+            <tr>
+                <td>{{ tblcontact.personid }}</td>
+                <td>{{ tblcontact.serialnumber ? 'Yes' : 'No' }}</td>
+                <td>{{ tblcontact.detail }}</td>
+                <td>
+                    <a href="{{ path('tblcontacts_show', {'serialnumber': tblcontact.serialnumber}) }}">show</a>
+                    <a href="{{ path('tblcontacts_edit', {'serialnumber': tblcontact.serialnumber}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tblcontacts_new') }}">Create new</a>
+{% endblock %}

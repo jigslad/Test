@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tblcontacttypes{% endblock %}
+
+{% block body %}
+    <h1>Tblcontacttypes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tblcontacttype.id ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Contacttype</th>
+                <td>{{ tblcontacttype.contacttype }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('contacttypes_index') }}">back to list</a>
+
+    <a href="{{ path('contacttypes_edit', {'id': tblcontacttype.id}) }}">edit</a>
+
+    {{ include('contacttypes/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tblcontacts{% endblock %}
+
+{% block body %}
+    <h1>Tblcontacts</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Personid</th>
+                <td>{{ tblcontact.personid }}</td>
+            </tr>
+            <tr>
+                <th>Serialnumber</th>
+                <td>{{ tblcontact.serialnumber ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Detail</th>
+                <td>{{ tblcontact.detail }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tblcontacts_index') }}">back to list</a>
+
+    <a href="{{ path('tblcontacts_edit', {'serialnumber': tblcontact.serialnumber}) }}">edit</a>
+
+    {{ include('Contacts/_delete_form.html.twig') }}
+{% endblock %}
