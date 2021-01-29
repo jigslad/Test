@@ -1,10 +1,75 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    {% for contact in form.contacts %}
-        <li>
-            {{ form_errors(contact) }}
-            {{ form_widget(contact) }}
-        </li>
-    {% endfor %}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    {{ form_start(form,{'attr':{'class':'row'}}) }}
+        <div class="col-sm-4">
+            <div class="form-group">
+                {{ form_label(form.firstname) }}
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.lastname) }}
+                {{ form_widget(form.lastname) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.organization) }}
+                {{ form_widget(form.organization) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.designation) }}
+                {{ form_widget(form.designation) }}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                {{ form_label(form.city) }}
+                {{ form_widget(form.city) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.state) }}
+                {{ form_widget(form.state) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.countryid) }}
+                {{ form_widget(form.countryid) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.zipcode) }}
+                {{ form_widget(form.zipcode) }}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                {{ form_label(form.isSelfEmp) }}
+                {{ form_widget(form.isSelfEmp) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.doj) }}
+                {{ form_widget(form.doj) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.dob) }}
+                {{ form_widget(form.dob) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.gender) }}
+                {{ form_widget(form.gender) }}
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                {{ form_label(form.photoName) }}
+                {{ form_widget(form.photoName) }}
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                {{ form_label(form.contacts) }}
+                {{ form_widget(form.contacts) }}
+            </div>
+        </div>
+        <div class="col-sm-3">
+        <button class="button">{{ button_label|default('Save') }}</button>
+            {% if button_label is defined %}
+                {{ include('Persons/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
+    {{ form_end(form) }}

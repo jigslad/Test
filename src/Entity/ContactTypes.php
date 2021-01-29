@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tblcontacttypes
+ * ContactTypes
  *
  * @ORM\Table(name="tblContacttypes")
  * @ORM\Entity
@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class ContactTypes
 {
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="ID", type="boolean", nullable=false)
+     * @ORM\Column(name="ID", type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -28,7 +28,7 @@ class ContactTypes
      */
     private $contacttype;
 
-    public function getId(): ?bool
+    public function getId(): ?int
     {
         return $this->id;
     }

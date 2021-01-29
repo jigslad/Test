@@ -13,9 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Contacts
 {
     /**
-     * @var int|null
+     * @var \Persons
      *
-     * @ORM\Column(name="PersonID", type="bigint", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Persons")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="PersonID", referencedColumnName="ID")
+     * })
      */
     private $personid;
 
@@ -36,7 +39,7 @@ class Contacts
     private $detail;
 
     /**
-     * @var \Tblcontacttypes
+     * @var \ContactTypes
      *
      * @ORM\ManyToOne(targetEntity="ContactTypes")
      * @ORM\JoinColumns({
@@ -74,12 +77,12 @@ class Contacts
         return $this;
     }
 
-    public function getContacttypeid(): ?Tblcontacttypes
+    public function getContacttypeid(): ?ContactTypes
     {
         return $this->contacttypeid;
     }
 
-    public function setContacttypeid(?Tblcontacttypes $contacttypeid): self
+    public function setContacttypeid(?ContactTypes $contacttypeid): self
     {
         $this->contacttypeid = $contacttypeid;
 

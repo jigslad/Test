@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tblpersons
  *
- * @ORM\Table(name="tblpersons")
+ * @ORM\Table(name="tblpersons", indexes={@ORM\Index(name="fk_tblpersons_1_idx", columns={"CountryID"})})
  * @ORM\Entity
  */
 class Persons
@@ -64,9 +64,12 @@ class Persons
     private $designation;
 
     /**
-     * @var int|null
+     * @var \Locations
      *
-     * @ORM\Column(name="CountryID", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Locations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CountryID", referencedColumnName="ID")
+     * })
      */
     private $countryid;
 

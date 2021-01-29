@@ -3,9 +3,10 @@
 {% block title %}New Person{% endblock %}
 
 {% block body %}
+    <a href="{{ path('tblpersons_index') }}">back to list</a>
     <h1>Add Person</h1>
 
     {{ include('Persons/_form.html.twig') }}
 
-    <a href="{{ path('tblpersons_index') }}">back to list</a>
+
 {% endblock %}

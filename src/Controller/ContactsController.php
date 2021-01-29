@@ -39,6 +39,8 @@ class ContactsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            dump($tblcontact);
+            exit();
             $entityManager->persist($tblcontact);
             $entityManager->flush();
 

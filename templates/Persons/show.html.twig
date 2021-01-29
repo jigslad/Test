@@ -52,8 +52,10 @@
                 <td>{{ tblperson.zipcode }}</td>
             </tr>
             <tr>
-                <th>PhotoName</th>
-                <td>{{ tblperson.photoName }}</td>
+                <th>Photo</th>
+                <td>
+                    <img src="{{ asset('uploads/photos/' ~ tblperson.photoName) }}" style="width: 200px"  alt="{{ tblperson.firstname }} {{ tblperson.lastname }}">
+                </td>
             </tr>
             <tr>
                 <th>PhotoContent</th>

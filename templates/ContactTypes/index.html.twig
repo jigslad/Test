@@ -16,7 +16,7 @@
         <tbody>
         {% for tblcontacttype in tblcontacttypes %}
             <tr>
-                <td>{{ tblcontacttype.id ? 'Yes' : 'No' }}</td>
+                <td>{{ tblcontacttype.id }}</td>
                 <td>{{ tblcontacttype.contacttype }}</td>
                 <td>
                     <a href="{{ path('contacttypes_show', {'id': tblcontacttype.id}) }}">show</a>

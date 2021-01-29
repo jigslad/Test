@@ -38,6 +38,21 @@ class PersonsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoName = $form->get('photoName')->getData();
+            if ($photoName) {
+                $originalFilename = pathinfo($photoName->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoName->guessExtension();
+                try {
+                    $photoName->move(
+                        $this->getParameter('photo_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $tblperson->setPhotoName($newFilename);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tblperson);
             $entityManager->flush();
@@ -52,7 +67,7 @@ class PersonsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tblpersons_show", methods={"GET"})
+     * @Route("/show/{id}", name="tblpersons_show", methods={"GET"})
      */
     public function show(Persons $tblperson): Response
     {
@@ -62,7 +77,7 @@ class PersonsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="tblpersons_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="tblpersons_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Persons $tblperson): Response
     {
@@ -70,6 +85,21 @@ class PersonsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoName = $form->get('photoName')->getData();
+            if ($photoName) {
+                $originalFilename = pathinfo($photoName->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoName->guessExtension();
+                try {
+                    $photoName->move(
+                        $this->getParameter('photo_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $tblperson->setPhotoName($newFilename);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('tblpersons_index');
@@ -82,7 +112,7 @@ class PersonsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tblpersons_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="tblpersons_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Persons $tblperson): Response
     {
