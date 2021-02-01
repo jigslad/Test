@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ContactTypes;
 use App\Entity\Persons;
 use App\Form\PersonsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,9 @@ class PersonsController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $type = $this->getDoctrine()
+            ->getRepository(ContactTypes::class)
+            ->findAll();
         $tblperson = new Persons();
         $form = $this->createForm(PersonsType::class, $tblperson);
         $form->handleRequest($request);
@@ -53,6 +57,7 @@ class PersonsController extends AbstractController
                 }
                 $tblperson->setPhotoName($newFilename);
             }
+            dump($tblperson);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tblperson);
             $entityManager->flush();
@@ -63,6 +68,7 @@ class PersonsController extends AbstractController
         return $this->render('Persons/new.html.twig', [
             'tblperson' => $tblperson,
             'form' => $form->createView(),
+            'Types' => $type,
         ]);
     }
 

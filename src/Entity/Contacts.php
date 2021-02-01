@@ -7,25 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tblcontacts
  *
- * @ORM\Table(name="tblContacts", indexes={@ORM\Index(name="fk_tblContacts_1_idx", columns={"ContactTypeID"})})
+ * @ORM\Table(name="tblContacts", indexes={@ORM\Index(name="index3", columns={"PersonID"}), @ORM\Index(name="fk_tblContacts_2_idx", columns={"ContactTypeID"})})
  * @ORM\Entity
  */
 class Contacts
 {
     /**
-     * @var \Persons
+     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Persons")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="PersonID", referencedColumnName="ID")
-     * })
-     */
-    private $personid;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="SerialNumber", type="boolean", nullable=false)
+     * @ORM\Column(name="SerialNumber", type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -37,6 +27,16 @@ class Contacts
      * @ORM\Column(name="Detail", type="string", length=100, nullable=true)
      */
     private $detail;
+
+    /**
+     * @var \Persons
+     *
+     * @ORM\ManyToOne(targetEntity="Persons")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="PersonID", referencedColumnName="ID")
+     * })
+     */
+    private $personid;
 
     /**
      * @var \ContactTypes

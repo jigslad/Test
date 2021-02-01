@@ -3,13 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Persons;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PersonsType extends AbstractType
@@ -22,7 +26,7 @@ class PersonsType extends AbstractType
             ->add('dob')
             ->add('organization')
             ->add('designation')
-            ->add('countryid',ChoiceType::class)
+            ->add('countryid')
             ->add('state')
             ->add('city')
             ->add('zipcode')
@@ -41,14 +45,14 @@ class PersonsType extends AbstractType
                 'choices' => array('Male' => 'M', 'Female' => 'F'),
                 'expanded' => true,
             ))
-            ->add('doj')
-            ->add('contacts');
-//            ->add('contacts',CollectionType::class,[
-//                'entry_type' => ContactsType::class,
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'allow_extra_fields' => true
-//            ]);
+            ->add('doj');
+        $builder->add('contacts', HiddenType::class);
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            $user = $event->getData();
+            $form = $event->getForm();
+            dump($user);
+//            exit();
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\LocationsType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -122,12 +123,6 @@ class Persons
      */
     private $doj;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="contacts", type="text", length=0, nullable=true)
-     */
-    private $contacts;
 
     public function getId(): ?string
     {
@@ -206,12 +201,12 @@ class Persons
         return $this;
     }
 
-    public function getCountryid(): ?int
+    public function getCountryid(): ?Locations
     {
         return $this->countryid;
     }
 
-    public function setCountryid(?int $countryid): self
+    public function setCountryid(?Locations $countryid): self
     {
         $this->countryid = $countryid;
 
@@ -302,15 +297,16 @@ class Persons
         return $this;
     }
 
-    public function getContacts(): ?string
+
+    public function __toString()
     {
-        return $this->contacts;
+        return $this->getFirstname();
     }
-
-    public function setContacts(?string $contacts): self
+    public function getContacts(){
+        return true;
+    }
+    public function setContacts($contacts): self
     {
-        $this->contacts = $contacts;
-
         return $this;
     }
 

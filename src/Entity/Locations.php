@@ -106,6 +106,4 @@ class Locations
     {
         return $this->getName();
     }
-
-
 }

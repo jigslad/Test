@@ -1,5 +1,6 @@
-    {{ form_start(form,{'attr':{'class':'row'}}) }}
-        <div class="col-sm-4">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-sm-4 border">
             <div class="form-group">
                 {{ form_label(form.firstname) }}
                 {{ form_widget(form.firstname) }}
@@ -17,7 +18,7 @@
                 {{ form_widget(form.designation) }}
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 border">
             <div class="form-group">
                 {{ form_label(form.city) }}
                 {{ form_widget(form.city) }}
@@ -35,7 +36,7 @@
                 {{ form_widget(form.zipcode) }}
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 border">
             <div class="form-group">
                 {{ form_label(form.isSelfEmp) }}
                 {{ form_widget(form.isSelfEmp) }}
@@ -53,23 +54,46 @@
                 {{ form_widget(form.gender) }}
             </div>
         </div>
-        <div class="col-sm-3">
+    </div>
+    <div class="row">
+        <div class="col-sm-3 border">
             <div class="form-group">
                 {{ form_label(form.photoName) }}
                 {{ form_widget(form.photoName) }}
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 border">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Contact Type</label>
+                        <select class="form-control" >
+                            {% for Type in Types %}
+                                <option value="{{ Type.id }}">{{ Type.Contacttype }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label>Details</label>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary">Add</button>
+                </div>
+            </div>
             <div class="form-group">
-                {{ form_label(form.contacts) }}
-                {{ form_widget(form.contacts) }}
+
+{#                {{ form_label(form.contacts) }}#}
+{#                {{ form_widget(form.contacts) }}#}
             </div>
         </div>
-        <div class="col-sm-3">
-        <button class="button">{{ button_label|default('Save') }}</button>
-            {% if button_label is defined %}
-                {{ include('Persons/_delete_form.html.twig') }}
-            {% endif %}
+        <div class="col-sm-3 border">
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+            <a class="btn btn-secondary" href="{{ path('tblpersons_index') }}">Cancle</a>
         </div>
     </div>
     {{ form_end(form) }}
+    {% if button_label is defined %}
+        {{ include('Persons/_delete_form.html.twig') }}
+    {% endif %}
